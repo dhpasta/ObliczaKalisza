@@ -66,7 +66,7 @@ Depending on role in city quest there are available features:
 
 <summary>Show examples of usage:</summary>
 
-<img src="/home/kuba/Documents/github/screenshots1.jpg">
+<img src="assets/screenshots1.jpg">
 
 **Left:** list of options avalible in administration panel
 
@@ -76,7 +76,7 @@ Depending on role in city quest there are available features:
 
 ---
 
-<img src="/home/kuba/Documents/github/screenshots2.jpg">
+<img src="assets/screenshots2.jpg">
 
 Image shows patrol home page (edition 2025).
 
