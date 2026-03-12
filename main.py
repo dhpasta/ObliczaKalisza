@@ -317,12 +317,6 @@ def register_character():
         try:
             resp = create_cookie(message="Przyznano uprawnienia punktowego gry miejskiej oblicza kalisza", id=request.form['id'], type='character')
 
-            # resp = redirect(url_for('message', text="Przyznano uprawnienia punktowego gry miejskiej oblicza kalisza"))
-            # resp.set_cookie('id', request.form['id'], max_age=60*60*12, domain='www.oblicza-kalisza.pl')
-            # resp.set_cookie('id', request.form['id'], max_age=60*60*12, domain='oblicza-kalisza.pl')
-            # resp.set_cookie('type', 'character', max_age=60*60*12, domain='www.oblicza-kalisza.pl')
-            # resp.set_cookie('type', 'character', max_age=60*60*12, domain='oblicza-kalisza.pl')
-
         except (pymysql.Error, pymysql.Warning) as error:
             print("pymysql.Error: ", error, file=sys.stderr)
             return render_template('error.html')

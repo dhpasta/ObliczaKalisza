@@ -60,6 +60,7 @@ Depending on role in city quest there are available features:
 - access to instructions, booklet and tips,
 - main page with individual QR code necessary to receive points for completed tasks.
 
+
 ## 📷 Screenshots
 
 <details>
@@ -68,9 +69,9 @@ Depending on role in city quest there are available features:
 
 <img src="assets/screenshots1.jpg">
 
-**Left:** list of options avalible in administration panel
+**Left:** list of options avalible in administration panel.
 
-**Center:** organizer home page contains key instructions, map of districts and summary of checkpoints already installed,
+**Center:** organizer home page contains key instructions, map of districts and summary of checkpoints already installed.
 
 **Right:** character home page shows list of patrols which already visited their station, awarded points and time of visit. Below there is list of remaining patrols in game.
 
@@ -86,15 +87,40 @@ Image shows patrol home page (edition 2025).
 </details>
 
 
+## 🔨 Operating the app
+
+<details>
+
+<summary>Details:</summary>
+
+- to **obtain access to administration panel** you have to visit address *host/admin_permit*,
+- then you can access panel via *host/admin*,
+- to **obtain organizer privileges** to manage checkpoints people can scan QR code available in administration panel or visit *host/register_organizer* - theirs name will be assigned to their phone,
+- organizers by scanning QR codes on checkpoints will assign them to districts in database,
+- **character privileges** can be obtained in panel or via *host/register_character*,
+- characters grant points to patrols by scanning patrols QR code available in patrol app,
+- organizers and characters can visit *host* for their home pages with summary,
+- staff privileges can be removed by scanning proper QR code in panel,
+- **patrols assign one phone to team** by scanning QR code in patrol booklet and confirming their identity,
+- in game patrols can scan codes on checkpoints and bonuses or visit *host* address for their home page,
+- patrols end game by scanning QR code in event office.
+</details>
+
 ## 📡 Project deploy
-Docker container ready do run. Requires MySQL database running in another container.
+Project ready for local testing in docker containers.
+
+Database has to be filled with patrols and tasks data.
+
+For event project has been deployed on AWS virtual machine with configured NGINX server, TLS certification and suitable database.
 
 
 ## 🔔 Planned features
 - create registration form for event in app,
 - check patrol location when QR code address is requested,
 - implement interactions between patrols,
-- develop administration panel abilities to maintain app database,
-- unify and reduce amount of funcions in database.py,
+- develop administration panel abilities to maintain app database during preparing and carrying out an event,
+- unify and reduce amount of functions in database.py,
 - create a test platform for new types of tasks,
 - add statistics preview to admin panel e.g., the most and least visited checkpoint.
+
+Mine main goal is to create universal engine for carrying out such a events just by uploading into it configuration files and data.
