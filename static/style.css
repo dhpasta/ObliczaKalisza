@@ -1,0 +1,282 @@
+body {
+    background-color:#e3e1df;
+}
+
+.container{
+    max-width: 1000px;
+    min-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    min-height: 98vh;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.header{
+    margin-bottom: 10px;
+
+    text-align: center;
+    font-weight: bolder;
+}
+
+.header img{
+    border: none;
+    border-radius: 15px;
+}
+
+.message{
+    border: none;
+    border-radius: 15px;
+
+    /* background-color:#FFD896; */
+    background-color:#FF5733;
+    color: white;
+    font-weight:900;
+
+    text-align: center;
+    /* font-style: italic; */
+    text-transform: uppercase;
+    font-size: 24px;
+
+    line-height: 2.0;
+
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 10px;
+}
+
+.content{
+    /* text-align: center; */
+    margin-bottom: 10px;
+    font-size: 28px;
+    line-height: 1.2;
+
+    flex: 1;
+}
+
+.footer{
+    max-width: 1000px;
+    width: 100%;
+    border-top: 1px solid #757575;
+
+    text-align: center;
+    color: #757575;
+    font-style: italic;
+}
+
+.footer img{
+    height: 1vw;
+}
+
+.footer a{
+    color: #757575;
+    text-decoration: none;
+}
+
+select {
+    min-width: 50%;
+    font-size: 24px;
+}
+
+input {
+    font-size: 24px;
+}
+
+input [type="text"]{
+    min-width: 50%;
+}
+
+table{
+    table-layout: auto;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+td{
+    width: 0px;
+}
+
+.title{
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+}
+
+.subtitle{
+    font-size: 22px;
+    text-align: center;
+    width: 100%;
+
+    border-bottom: 1px solid #757575;
+    padding-bottom: 10px;
+}
+
+.centered{
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.box{
+    border-bottom: 1px solid #757575;
+    padding-bottom: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
+    display:flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+    
+}
+
+.key{
+    display:flex;
+    flex-direction: column;
+
+    text-align: center;
+
+    font-weight: bold;
+    margin-right: 1vw;
+
+    padding: 0.2vw;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.code_grey{
+    font-weight: light;
+    color: grey;
+
+    font-size: 18px;
+}
+
+.key_gold{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.key img{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.buttons{
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+}
+
+.button {
+    text-transform: uppercase;
+
+    background-color: #91C172;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 5px 10px;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.button:hover{
+    background-color: #c59232;
+}
+
+.warning {
+    margin-left: auto;
+    margin-right: auto;
+    
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 54px;
+
+    /* position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); */
+}
+
+table, th, td {
+    border: 4px solid black;
+    border-collapse: collapse;
+}
+
+label {
+    /* display:flex; */
+    /* flex-direction: column; */
+}
+
+
+@media screen and (max-width: 1000px) {
+    .container{
+        min-height: 85vh;
+    }
+    .header{
+        margin-bottom: 2vw;
+    }
+
+    .message{
+        font-size: 5vw;
+    }
+
+    .content {
+        font-size: 5vw;
+        margin-bottom: 6vw;
+        padding-left: 1vw;
+        padding-right: 1vw;
+    }
+
+    .footer{
+        font-size: 3vw;
+        padding-top: 1vw;
+    }
+
+    .footer img{
+        height: 3vw;
+    }
+
+    select {
+        min-width: 95%;
+        font-size: 4vw;
+    }
+
+    input{
+        font-size: 6vw;
+    }
+
+    input [type="text"]{
+        min-width: 50%;
+    }
+
+    .patrol_name{
+        font-size: 8vw;
+    }
+
+    .points{
+        font-size: 5vw;
+    }
+
+    .button {
+        font-size: 5vw;
+    }
+
+    .warning {
+        font-size: 10vw;
+    }
+
+    .code_grey {
+        font-size: 4vw;
+    }
+
+    table {
+        font-size: 3vw;
+    }
+  }

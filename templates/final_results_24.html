@@ -1,0 +1,75 @@
+{% extends "layout.html" %}
+
+    {% block content %}
+        <style>
+            table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            }
+            th, td {
+                text-align: center;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        </style>
+        
+        <div class="title">Oblicza Kalisza 2024 - Wyryte w pamięci</div>
+        <hr>
+        <div class="title">Wyniki rywalizacji</div>
+        <hr>
+        <div class="title">Kategoria Goniec</div>
+    
+        <table>
+            <tr>
+                <th></th>
+                <th style="text-align: left;">Nazwa patrolu</th>
+                <th>Punkty</th>
+                <th>Kamienice</th>
+            </tr>
+            {% set i = namespace(value=1) %}
+            {% for data in data_easy %}
+            <tr>
+                <td style="font-weight: bold;">{{ i.value }}</td>
+                <td style="text-align: left;">{{ data.patrol_name }}</td>
+                <td>{{ data.points }}</td>
+                <td>{{ data.houses }}</td>
+            </tr>
+            {% set i.value = i.value + 1 %}
+            {% endfor %}
+        </table>
+
+        <hr>
+
+        <div class="title">Kategoria Wyga</div>
+        
+        <table>
+            <tr>
+                <th></th>
+                <th style="text-align: left;">Nazwa patrolu</th>
+                <th>Punkty</th>
+                <th>Kamienice</th>
+            </tr>
+            {% set i = namespace(value=1) %}
+            {% for data in data_hard %}
+            <tr>
+                <td style="font-weight: bold;">{{ i.value }}</td>
+                <td style="text-align: left;">{{ data.patrol_name }}</td>
+                <td>{{ data.points }}</td>
+                <td>{{ data.houses }}</td>
+            </tr>
+            {% set i.value = i.value + 1 %}
+            {% endfor %}
+        </table>
+    
+        <hr>
+        
+        <div class="title">Dziękujemy za Wasz udział!</div>
+
+        <hr>
+
+        <div class="header">
+            <img src="{{ url_for('static', filename='background_old.png')}}" width="100%">
+        </div>
+    
+
+    {% endblock %}

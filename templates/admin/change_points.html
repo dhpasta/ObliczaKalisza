@@ -1,0 +1,41 @@
+{% extends "layout_admin.html" %}
+
+    {% block content %}
+        <form method="POST" action="/admin_update_points">
+            <div class="centered">
+                <b>Zmiana punktów z Karty Umiejętności</b>
+                <hr>
+
+                Id patrolu:<br>
+                <input name="patrol_id" id="patrol_id" type="text" maxlength="2" inputmode="numeric" required>
+                <hr>
+
+                Dzielnica:<br>
+                <input type="radio" id="1" name="district" value="1" required>
+                <label for="1">1.</label><br>
+                <input type="radio" id="2" name="district" value="2">
+                <label for="2">2.</label><br>
+                <input type="radio" id="3" name="district" value="3">
+                <label for="3">3.</label><br>
+                <input type="radio" id="4" name="district" value="4">
+                <label for="4">4.</label><br>
+                <input type="radio" id="5" name="district" value="5">
+                <label for="5">5.</label><br>
+                <input type="radio" id="6" name="district" value="6">
+                <label for="6">6.</label><br>
+                <input type="radio" id="7" name="district" value="7">
+                <label for="7">7.</label><br>
+                <input type="radio" id="8" name="district" value="8">
+                <label for="8">8.</label><br>
+                <hr>
+
+                Nowa liczba punktów:<br>
+                <input name="points" id="points" type="text" maxlength="1" inputmode="numeric" required>
+               <hr>
+            </div>
+            
+            <div class="buttons">
+                <input class="button" type="submit" name="save" value="DODAJ BONUS">
+            </div>
+        </form>
+    {% endblock %}

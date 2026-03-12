@@ -1,0 +1,86 @@
+{% extends "layout.html" %}
+
+    {% block content %}
+        <style>
+            table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            }
+            th, td {
+                text-align: center;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        </style>
+        
+        <div class="title">Strona organizatora Gry Miejskiej</div>
+        <hr>
+        W każdej dzielnicy docelowo ma znajdować się:<br>
+        <ul>
+            <li>12 srebrnych kodów</li>
+            <li>3 złote kody</li>
+        </ul>
+        <hr>
+        Numeracja dzielnic:
+        <br>
+        <img src="{{ url_for('static', filename='districts.png')}}" width="100%">
+        <hr>
+        Podgląd kodów rozmieszczonych w mieście:
+        <br>
+        <br>
+
+        {% set n = namespace(value=1) %}
+        {% for district in data %}
+        <b>Dzielnica {{ n.value }}:</b>
+        <br>
+            {% if district %}
+                <table>
+                    <tr>
+                        <th></th>
+                        <th>typ</th>
+                        <th>lokalizacja</th>
+                        <th>monter</th>
+                        <th>czas</th>
+                    </tr>
+
+                    {% set i = namespace(value=1) %}
+                    {% for code in district %}
+                        <tr>
+                            <td style="text-align: left;">{{ i.value }}.</td>
+                            {% if code['type'] == 'silver' %}
+                            <td style="text-align: center; background-color: #C0C0C0;">srebrny</td>
+                            {% endif %}
+                            {% if code['type'] == 'gold' %}
+                            <td style="text-align: center; background-color: #FFD700;">złoty</td>
+                            {% endif %}
+                            <td style="width: unset; max-width: 0px; word-wrap: break-word;">{{ code['location'] }}</td>
+                            <td>{{ code['organizer_name'] }}</td>
+                            <td>{{ code['timestamp'] }}</td>
+                        </tr>
+                        {% set i.value = i.value + 1 %}
+                    {% endfor %}
+                </table>
+            {% else %}
+            <div class="centered">
+                W TEJ DZIELNICY JESZCZE NIE ROZMIESZCZONO ŻADNYCH KODÓW
+            </div>
+            {% endif %}
+            {% set n.value = n.value + 1 %}
+            <br>
+            <br>
+            <hr>
+        {% endfor %}
+
+        <script>
+            function confirmationBox() {
+              let text = "Czy jesteś pewien że chcesz usunąć uprawnienia?";
+              if (confirm(text) == true) {
+                window.location.href = "{{ url_for('remove_cookie') }}";
+              }
+            }
+        </script>
+
+        <div class="centered" style="margin-top: 30px;">
+            <a style="text-decoration: underline;" onclick="confirmationBox()">usuń uprawnienia punktowego</a><br>
+        </div>
+    {% endblock %}

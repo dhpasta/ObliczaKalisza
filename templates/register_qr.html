@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+    {% block content %}
+        <form method="POST" action="/register_qr">
+            <input name ="qr_id" type="hidden" value="{{ qr_id }}">
+            <input name ="organizer_name" type="hidden" value="{{ organizer_name }}">
+            <div class="centered">
+                <b>Zgłoszenie kodu QR</b>
+                <hr>
+                Numeracja dzielnic:
+                <br>
+                <img src="{{ url_for('static', filename='districts.png')}}" width="100%">
+                <hr>
+
+                Typ kodu:<br>
+                <input type="radio" id="silver" name="type" value="silver" required>
+                <label for="silver">Kod srebrny</label><br>
+                <input type="radio" id="gold" name="type" value="gold">
+                <label for="gold">Kod złoty</label><br>
+                <hr>
+                Dzielnica:<br>
+                <input type="radio" id="1" name="district" value="1" required>
+                <label for="1">1.</label><br>
+                <input type="radio" id="2" name="district" value="2">
+                <label for="2">2.</label><br>
+                <input type="radio" id="3" name="district" value="3">
+                <label for="3">3.</label><br>
+                <input type="radio" id="4" name="district" value="4">
+                <label for="4">4.</label><br>
+                <input type="radio" id="5" name="district" value="5">
+                <label for="5">5.</label><br>
+                <input type="radio" id="6" name="district" value="6">
+                <label for="6">6.</label><br>
+                <input type="radio" id="7" name="district" value="7">
+                <label for="7">7.</label><br>
+                <input type="radio" id="8" name="district" value="8">
+                <label for="8">8.</label><br>
+                {% if organizer_history != 0 %}
+                <br>
+                <span style="font-style: italic;">Poprzedni kod zgłosiłeś w dzielnicy {{ organizer_history }}.</span>
+                {% endif %}
+                <hr>
+                Lokalizacja:<br>
+                <input name="location" id="location" type="text" maxlength="255" required>
+                <hr>
+            </div>
+            
+            <div class="buttons">
+                <input class="button" type="submit" name="save" value="ZGŁOŚ KOD">
+            </div>
+        </form>
+    {% endblock %}

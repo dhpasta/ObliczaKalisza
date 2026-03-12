@@ -1,0 +1,101 @@
+{% extends "layout.html" %}
+
+    {% block content %}
+        <style>
+            table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            }
+            th, td {
+                text-align: center;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        </style>
+        <div class="title">
+            Strona punktu "{{ data['character_name'].name }}"
+        </div>
+        <hr>
+        <span style="font-weight: bold;">Patrole jakie już odwiedziły Wasz punkt:</span>
+        <br>
+        <table>
+            <tr>
+                <th></th>
+                <th>Patrol</th>
+                <th>Punkty</th>
+                <th>Godzina</th>
+            </tr>
+        {% set i = namespace(value=1) %}
+        {% for data in data['visited'] %}
+        <tr>
+            <td style="text-align: left;">{{ i.value }}.</td>
+            <td style="text-align: left;">{{ data.patrol_name }}</td>
+            <td style="text-align: center;">{{ data.points }}</td>
+            <td style="text-align: center;">{{ data.timestamp }}</td>
+        </tr>
+        {% set i.value = i.value + 1 %}
+        {% endfor %}
+        </table>
+
+        <hr>
+        {% if data['remaining'] %}
+        <span style="font-weight: bold;">Pozostałe patrole uczestniczące w grze:</span>
+        <table>
+            {% set i = namespace(value=1) %}
+            {% for data in data['remaining'] %}
+            <tr>
+                <td style="text-align: left;">{{ i.value }}.</td>
+                <td style="text-align: left;">{{ data.patrol_name }}</td>
+            </tr>
+            {% set i.value = i.value + 1 %}
+            {% endfor %}
+        </table>
+        {% else %}
+            <div class="centered" style="font-weight: bold;">
+                Wszystkie patrole biorące udział w grze odwiedziły Wasz punkt!
+            </div>
+        {% endif %}
+
+        <hr>
+        {% if cheat_qr_1 %}
+        <span style="font-weight: bold;">Pokaż patrolowi wybrany kod jeśli kupił od Ciebie Kartę Umiejętności:</span>
+        <br>
+        <div class="centered">
+            GILDIA RZEMIEŚLNIKÓW:<br>
+            <img src="data:image/png;base64,{{ cheat_qr_1 }}" width="60%" alt="QR Code">
+            <br>
+            <br>
+            <br>
+            GILDIA WOJOWNIKÓW:<br>
+            <img src="data:image/png;base64,{{ cheat_qr_2 }}" width="60%" alt="QR Code">
+            <br>
+            <br>
+            <br>
+            GILDIA HANDLARZY:<br>
+            <img src="data:image/png;base64,{{ cheat_qr_3 }}" width="60%" alt="QR Code">
+            <br>
+            <br>
+            <br>
+            GILDIA DUCHOWIEŃSTWA:<br>
+            <img src="data:image/png;base64,{{ cheat_qr_4 }}" width="60%" alt="QR Code">
+            <br>
+            <br>
+            <br>
+        </div>
+        <hr>
+        {% endif %}
+        
+
+        <script>
+            function confirmationBox() {
+              let text = "Czy jesteś pewien że chcesz usunąć uprawnienia?";
+              if (confirm(text) == true) {
+                window.location.href = "{{ url_for('remove_cookie') }}";
+              }
+            }
+        </script>
+
+        <div class="centered" style="margin-top: 30px;">
+            <a style="text-decoration: underline;" onclick="confirmationBox()">usuń uprawnienia punktowego</a><br>
+        </div>
+    {% endblock %}

@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+    {% block content %}
+
+        <a href="{{ url_for('map', district=0) }}">wyczyść</a><br>
+        <a href="{{ url_for('map', district=1) }}">dzielnica 1</a><br>
+        <a href="{{ url_for('map', district=2) }}">dzielnica 2</a><br>
+        <a href="{{ url_for('map', district=3) }}">dzielnica 3</a><br>
+        <a href="{{ url_for('map', district=4) }}">dzielnica 4</a><br>
+        <a href="{{ url_for('map', district=5) }}">dzielnica 5</a><br>
+
+        <div class="header">
+            <img src="{{ url_for('static', filename='/map/map.png')}}" width="100%">
+        </div>
+    
+
+    {% endblock %}

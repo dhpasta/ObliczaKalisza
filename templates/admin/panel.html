@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+    
+    {% block content %}
+    {% if message %}
+    {% endif %}
+        <div class="title">Panel administracyjny</div>
+        <div class="subtitle">wybierz opcje</div>
+        
+        <div class="centered">
+            <a href="{{ url_for('admin_qr') }}">Lista kodów QR</a><br>
+            <a href="{{ url_for('admin_patrols') }}">Lista patroli</a><br>
+            <a href="{{ url_for('admin_map') }}">Podgląd mapki</a><br>
+            <a href="{{ url_for('admin_characters') }}">Podgląd punktów osobowych</a><br>
+            <hr>
+            <a href="{{ url_for('admin_add_patrol') }}">Dodaj nowy patrol</a><br>
+            <a href="{{ url_for('admin_results') }}">Aktualne wyniki</a><br>
+            <a href="{{ url_for('admin_functional_codes') }}">Funkcyjne kody QR</a><br>
+            <hr>
+            <a href="{{ url_for('admin_logs') }}">Logi bazy danych</a><br>
+            <hr>
+            <span style="font-weight: bold;">Karta umiejętności:</span><br>
+            <a href="{{ url_for('admin_add_bonus') }}">Przyznawanie bonusu</a><br>
+            <a href="{{ url_for('admin_add_insignum') }}">Przyznawanie insygnium</a><br>
+            <a href="{{ url_for('admin_change_points') }}">Zmiana punktów</a><br>
+
+            <hr>
+            
+            <!-- <script>
+                function confirmationBox() {
+                  let text = "Czy jesteś pewien że chcesz zresetować bazę?";
+                  if (confirm(text) == true) {
+                    window.location.href = "{{ url_for('admin_reset_for_test') }}";
+                  }
+                }
+            </script>
+    
+            <div class="centered" style="margin-top: 30px;">
+                <a style="text-decoration: underline;" onclick="confirmationBox()">! reset bazy do testu !</a><br>
+            </div> -->
+        </div>
+    {% endblock %}

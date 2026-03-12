@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+    {% block content %}
+    {% if text %}
+    <div class="warning">
+        {{ text }}
+    </div>
+    <br>
+    <div class="centered">
+        <span style="font-style: italic">za chwilę zostaniesz przeniesiony na stronę główną</span>
+    </div>
+    {% endif %}
+
+    {% if wrong_answer %}
+    <div class="title">Niestety udzieliliście złej odpowiedzi!</div>
+        
+        <div class="box" style="border-bottom: none; padding-top: 10px;">
+            Wasze pytanie:
+        </div>
+        <div class="box">
+            <span style="font-style: italic;">{{ wrong_answer.question }}</span>
+        </div>
+        <div class="box" style="border-bottom: none; padding-top: 10px;">
+            Poprawna odpowiedź:
+        </div>
+        <div class="box">
+            <span style="font-style: italic;">{{ wrong_answer.answer }}</span>
+        </div>
+    <div class="title" style="padding-top: 10px;">Spróbujcie jeszcze raz, zeskanujcie ponownie kod!</div>
+    {% endif %}
+
+    {% if hint %}
+    <div class="centered">
+        <b>Podpowiedź do pocztówki nr {{ hint.checkpoint_id }}:</b>
+        <br><br>
+        <i>{{ hint.hint }}</i>
+    </div>
+    {% endif %}
+
+    {% endblock %}

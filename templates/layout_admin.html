@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+  <head>
+    {% block head %}
+    <title>Oblicza Kalisza</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.png')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    {% endblock %}
+  </head>
+  <body>
+    <div class="container">
+
+      <div class="header">
+          <div class="title">
+            <a href="{{ url_for('admin') }}">POWRÓT DO PANELU</a>
+            <hr>
+          </div>
+      </div>
+           
+      <div class="content">
+          {% block content %}{% endblock %}
+      </div>
+
+      <div class="header">
+        <div class="title">
+          <a href="{{ url_for('admin') }}">POWRÓT DO PANELU</a>
+        </div>
+    </div>
+
+    </div>
+  </body>
+</html>

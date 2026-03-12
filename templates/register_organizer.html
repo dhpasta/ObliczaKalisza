@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+    {% block content %}
+        <form method="POST" action="/register_organizer">
+            <div class="centered">
+                <label for="name">Podaj swój nick:</label>
+                <input name="name" id="name" type="text" pattern=".{3,}">
+            </div>
+            <div class="buttons">
+                <input class="button" type="submit" name="save" value="ZAPISZ">
+            </div>
+            <br>
+            <div style="font-style: italic; font-size: 16px; @media screen and (max-width: 1000px) {font-size: 3vw;} text-align: center;">Aplikacja do swojego działania wykorzystuje pliki cookie, które w Twoim telefonie nie dotrwają do jutra :)</div>
+        </form>
+    {% endblock %}

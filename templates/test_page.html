@@ -1,0 +1,7 @@
+{% extends "layout.html" %}
+
+    {% block content %}
+        Generowanie testowego kodu QR<br>
+
+        <img src="data:image/png;base64,{{ qr_img }}" alt="QR Code">
+    {% endblock %}

@@ -1,0 +1,252 @@
+{% extends "layout.html" %}
+
+    {% block content %}
+        {% if message %}
+
+        {% endif %}
+
+        {% if results %}
+            <style>
+                table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                }
+                th, td {
+                    text-align: center;
+                    padding-left: 5px;
+                    padding-right: 5px;
+                }
+            </style>
+            
+            <div class="title">V edycja Gry Miejskiej Oblicza Kalisza dobiegła końca!</div>
+            <br>
+            <div class="centered">
+            Dziękujemy wszystkim patrolom za zaangażowanie i wspólne świętowanie Niepodległości!<br><br>
+            Gratulujemy pięknej rywalizacji i prezentujemy jej wyniki:
+            </div>
+            <br>
+
+            {% if patrol_id %}
+            <hr>
+            <div class="centered">
+                <a href="{{ url_for('patrol_page_after', id=patrol_id) }}">ZOBACZ STRONĘ SWOJEGO PATROLU</a><br>
+            </div>
+            <hr>
+            {% endif %}
+
+            <table>
+                <tr>
+                    <th></th>
+                    <th style="text-align: center;">patrol</th>
+                    <th>ścieżka</th>
+                    <th>gildia</th>
+                    <th>punkty</th>
+                    <th>czas zakończenia</th>
+                </tr>
+                {% set i = namespace(value=1) %}
+                {% for results in results %}
+                <tr>
+                    <td style="text-align: left;">{{ i.value }}.</td>
+                    <td style="text-align: left; width: unset; max-width: 0px; word-wrap: break-word;">{{ results.patrol_name }}</td>
+                    {% if results.path == 'easy' %}
+                    <td>KRW</td>
+                    {% endif %}
+                    {% if results.path == 'hard' %}
+                    <td>ZDL</td>
+                    {% endif %}
+                    {% if results.fraction == 1 %}
+                    <td>R</td>
+                    {% endif %}
+                    {% if results.fraction == 2 %}
+                    <td>W</td>
+                    {% endif %}
+                    {% if results.fraction == 3 %}
+                    <td>H</td>
+                    {% endif %}
+                    {% if results.fraction == 4 %}
+                    <td>D</td>
+                    {% endif %}
+                    <td>{{ results.points }}</td>
+                    <td>{{ results.time }}</td>
+                </tr>
+                {% set i.value = i.value + 1 %}
+                {% endfor %}
+            </table>
+        {% else %}
+            {% if patrol %}
+                <div class="centered">
+                    Strona patrolu <span style="font-weight: bold">{{ patrol_data.name }}</span>
+                    <hr>
+                    {% if patrol_data.path == 'easy' %}
+                    <span style="font-style: italic;">Ścieżka Krzewiciel</span>
+                    {% endif %}
+                    {% if patrol_data.path == 'hard' %}
+                    <span style="font-style: italic;">Ścieżka Zjednoczyciel</span>
+                    {% endif %}
+                    <br>
+
+                    {% if patrol_data.fraction == 1 %}
+                    <span style="text-decoration: underline; text-decoration-color: #5d7163; text-decoration-thickness: 50%;">Gildia Rzemieślników</span>
+                    {% endif %}
+                    {% if patrol_data.fraction == 2 %}
+                    <span style="text-decoration: underline; text-decoration-color: #884547; text-decoration-thickness: 50%;">Gildia Wojowników</span>
+                    {% endif %}
+                    {% if patrol_data.fraction == 3 %}
+                    <span style="text-decoration: underline; text-decoration-color: #b89042; text-decoration-thickness: 50%;">Gildia Handlarzy</span>
+                    {% endif %}
+                    {% if patrol_data.fraction == 4 %}
+                    <span style="text-decoration: underline; text-decoration-color: #8ca6b1; text-decoration-thickness: 50%;">Gildia Duchowieństwa</span>
+                    {% endif %}
+
+                    <hr>
+                    Ilość zgromadzonych punktów:
+                    <br>
+                    <span style="font-weight: bold">{{ patrol_data.points }}</span>
+
+                    <hr>
+                    Zdobyte pieczątki:
+                    <br>
+                    <table style="border: none;">
+                        <tr>
+                            <td style="border: none; "><img src="{{ url_for('static', filename='stamp.png')}}"></td>
+                            <td style="vertical-align: middle; text-align: center; border: none; padding-left: 10px; padding-right: 15px;">x {{ patrol_data.stamps }}</td>
+                            <td style="border: none;"><img src="{{ url_for('static', filename='bonus.png')}}"></td>
+                            <td style="vertical-align: middle; text-align: center; border: none; padding-left: 10px; padding-right: 15px;">x {{ patrol_data.bonus }}</td>
+                        </tr>
+                    </table>
+                </div>
+                <hr>
+                <div class="centered">
+                    <img src="{{ url_for('static', filename=map)}}" width="100%">
+                    <br>
+                    <span style="color:#5d7163;">RZEMIEŚLNICY</span> | <span style="color:#884547;">WOJOWNICY</span>
+                    <br>
+                    <span style="color:#b89042;">HANDLARZE</span> | <span style="color:#8ca6b1;">DUCHOWIEŃSTWO</span> 
+                </div>
+                <hr>
+                Zdobyte wskazówki: 
+                {% if patrol_data.hints != 0 %}
+                {{ patrol_data.hints }}<br><br>
+                <div class="centered">
+                <b>Zapamiętaj wskazówkę! Na stronie wyświetla się tylko ostatnia!</b>
+                    <img src="{{ url_for('static', filename=patrol_data.hint_img[0])}}" width="100%">
+                    {% if patrol_data.hint_img[1] == 1 %}
+                    <span style="font-style: italic;">powyższa wskazówka dotyczy berła</span>
+                    {% endif %}
+                    {% if patrol_data.hint_img[1] == 2 %}
+                    <span style="font-style: italic;">powyższa wskazówka dotyczy jabłka</span>
+                    {% endif %}
+                    {% if patrol_data.hint_img[1] == 3 %}
+                    <span style="font-style: italic;">powyższa wskazówka dotyczy szczerbca</span>
+                    {% endif %}
+                </div>
+                {% else %}
+                    0<br>
+                {% endif %}
+                <hr>
+                Zdobyte Insygnia:<br>
+                <div class="centered">
+                    {% if patrol_data.scepter %}
+                        <img src="{{ url_for('static', filename='scepter.png')}}">
+                    {% else %}
+                        <img src="{{ url_for('static', filename='scepter_empty.png')}}">
+                    {% endif %}
+                    {% if patrol_data.apple %}
+                        <img src="{{ url_for('static', filename='apple.png')}}">
+                    {% else %}
+                        <img src="{{ url_for('static', filename='apple_empty.png')}}">
+                    {% endif %}
+                    {% if patrol_data.sword %}
+                        <img src="{{ url_for('static', filename='sword.png')}}">
+                    {% else %}
+                        <img src="{{ url_for('static', filename='sword_empty.png')}}">
+                    {% endif %}
+                </div>
+                <hr>
+                Koronacja Króla:<br>
+                <div class="centered">
+                    {% if patrol_data.coronation %}
+                        <img src="{{ url_for('static', filename='crown.png')}}">
+                    {% else %}
+                        <img src="{{ url_for('static', filename='crown_empty.png')}}">
+                    {% endif %}
+                </div>
+
+                <hr>
+                Kod QR patrolu:
+                <div class="centered">
+                    <img src="data:image/png;base64,{{ patrol }}" width="60%" alt="QR Code">
+                </div>
+                <hr>
+                {% if patrol_data.path == 'easy' %}
+                <div class="centered">    
+                    <a href="https://drive.google.com/drive/folders/1rzyHwvJ_JqOavRQVTv2h8gMWkFzGIq2K?usp=sharing" target="_blank">pobierz instrukcje gry</a>
+                </div>
+                {% endif %}
+                {% if patrol_data.path == 'hard' %}
+                <div class="centered">    
+                    <a href="https://drive.google.com/drive/folders/1k-mS55tvDyfQgJjj6BXhKry8f0WgjMIP?usp=sharing" target="_blank">pobierz instrukcje gry</a>
+                </div>
+                {% endif %}
+                <hr>
+                Kontakt do organizatorów:<br>
+                <div class="centered">
+                    <span style="font-style: italic;">734-496-692</span> | <span style="font-style: italic;">605-558-723</span>
+                </div>
+            {% endif %}
+            
+            {% if map_homepage %}
+                <div class="title" style="border-bottom: none; padding-top: 10px; font-weight: bold;">
+                    Trwa V edycja Gry Miejskiej Oblicza Kalisza!<br>
+                    <hr>
+                    Śledź postępy rywalizujących patroli:
+                    <img src="{{ url_for('static', filename=map_homepage)}}" width="100%">
+                    
+                    Wyniki Gry będą dostępne na tej stronie po godzinie 18<sup>00</sup>
+                </div>
+                <hr>
+
+                <div class="subtitle" style="border-bottom: none; padding-top: 10px;">
+                    <a href="{{ url_for('final_results_24') }}">Wyniki Gry Miejskiej 2024 - Wyryte w pamięci</a>
+                </div>
+
+                <hr>
+
+                <div class="subtitle" style="border-bottom: none; padding-top: 10px;">
+                    Informacje o tegorocznej edycji Gry Miejskiej można znaleźć na naszym
+                    <br>
+                    <a href="https://www.facebook.com/ObliczaKalisza">Facebooku</a>
+                </div>
+            {% else %}
+                {% if not patrol %}
+                <div class="subtitle" style="border-bottom: none; padding-top: 10px; font-weight: bold;">
+                    Zapisy na Grę dobiegły końca!
+                    <br>
+                    Do rywalizacji zgłosiło się 67 patroli!
+                </div>
+
+                <hr>
+                <div class="subtitle" style="border-bottom: none; padding-top: 10px; text-align: left;">
+                    <b>Harmonogram wydarzenia:</b><br>
+                    <b>12<sup>00</sup> -13<sup>00</sup></b> - Otwarcie Biura Gry pod Basztą Dorotką - możliwość odbioru pakietu startowego<br>
+                    <b>13<sup>00</sup></b> - Start Gry pod Basztą Dorotką<br>
+                    <b>17<sup>00</sup></b> - Ognisko oraz zakończenie gry pod Basztą Dorotką
+                </div>
+
+                <hr>
+
+                <div class="subtitle" style="border-bottom: none; padding-top: 10px;">
+                    <a href="{{ url_for('final_results_24') }}">Wyniki Gry Miejskiej 2024 - Wyryte w pamięci</a>
+                </div>
+
+                <hr>
+
+                <div class="subtitle" style="border-bottom: none; padding-top: 10px;">
+                    Informacje o tegorocznej edycji Gry Miejskiej można znaleźć na naszym
+                    <br>
+                    <a href="https://www.facebook.com/ObliczaKalisza">Facebooku</a>
+                </div>
+                {% endif %}
+            {% endif %}
+        {% endif %}
+    {% endblock %}

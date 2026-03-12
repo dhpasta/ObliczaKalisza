@@ -1,0 +1,35 @@
+{% extends "layout_admin.html" %}
+
+    {% block content %}     
+        <script>
+            function confirmationBox() {
+            let text = "Czy jesteś pewien że chcesz wygenerować nową mapę?";
+            if (confirm(text) == true) {
+                window.location.href = "{{ url_for('admin_generate_map') }}";
+            }
+            }
+        </script>
+
+        <div class="title">Podgląd mapki <3</div>
+        <br>
+            <div class="centered">
+                <img src="{{ url_for('static', filename=map)}}" width="100%">
+            <hr>
+            <div class="centered" style="margin-top: 30px;">
+                <a style="text-decoration: underline;" onclick="confirmationBox()">- wymuś wygenerowanie nowej mapy -</a><br>
+            </div>
+            <hr>
+            Gildie:
+            <br>
+            <span style="color:#5d7163;">1. RZEMIEŚLNICY</span> | <span style="color:#884547;">2. WOJOWNICY</span>
+            <br>
+            <span style="color:#b89042;">3. HANDLARZE</span> | <span style="color:#8ca6b1;">4. DUCHOWIEŃSTWO</span> 
+            <hr>
+            Przypisane dzielnice:<br>
+            1- Wojowie<br>
+            2 - Handlarze<br>
+            6 - Duchowieństwo<br>
+            7 - Rzemieślnicy
+            </div>
+        
+    {% endblock %}

@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+    {% block content %}
+        <form method="POST" action="/add_cookie_patrol">
+            <input name ="fraction" type="hidden" value="{{ fraction }}">
+            <div class="centered">
+                <b>Uczestniku! Oblicza Kalisza witają Cię na Grze Miejskiej!</b><br><br>
+
+                <label for="patrol_name">Wybierz nazwę swojego patrolu:</label>
+                <select name="patrol_name" id="patrol_name" style="max-width: 100%;">
+                    {% if easy_path %}
+                    <optgroup label="Kategoria Krzewiciel">
+                    {% for easy_path in easy_path %}
+                        <option value="{{ easy_path[0] }}">{{ easy_path[0] }}</option>
+                    {% endfor %}
+                    </optgroup>
+                    {% endif %}
+                    {% if hard_path %}
+                    <optgroup label="Kategoria Zjednoczyciel">
+                    {% for hard_path in hard_path %}
+                        <option value="{{ hard_path[0] }}">{{ hard_path[0] }}</option>
+                    {% endfor %}
+                    </optgroup>
+                    {% endif %}
+                </select>
+                <br><br>
+                <label for="code">Potwierdź że to Ty i podaj trzy ostatnie cyfry numeru telefonu:</label>
+                <input name="code" id="code" type="text" pattern="[0-9]{3}" inputmode="numeric">
+            </div>
+            <br>
+            <div class="centered">
+                <i>
+                    <p>Naciśnij przycisk i przypisz telefon do swojego patrolu!</p>
+                </i>
+            </div>
+            <div class="buttons">
+                <input class="button" type="submit" name="save" value="PRZYPISZ TELEFON">
+            </div>
+            <br>
+            <div style="font-style: italic; font-size: 16px; @media screen and (max-width: 1000px) {font-size: 3vw;} text-align: center;">Aplikacja do swojego działania wykorzystuje pliki cookie, które w Twoim telefonie nie dotrwają do jutra :)</div>
+        </form>
+    {% endblock %}

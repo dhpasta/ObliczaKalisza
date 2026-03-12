@@ -1,0 +1,18 @@
+{% extends "layout_admin.html" %}
+
+    {% block content %}
+        <div class="title">Podgląd punktów osobowych</div>
+        <br>
+        <hr>
+        <br>
+        <div class="centered">
+            <a href="{{ url_for('admin_character_page', id='1') }}">1. Katedra</a><br>
+            <a href="{{ url_for('admin_character_page', id='2') }}">2. Rozmarek</a><br>
+            <a href="{{ url_for('admin_character_page', id='3') }}">3. Muzeum</a><br>
+            <a href="{{ url_for('admin_character_page', id='4') }}">4. Ratusz</a><br>
+            <a href="{{ url_for('admin_character_page', id='5') }}">5. Franciszkanie</a><br>
+            <a href="{{ url_for('admin_character_page', id='6') }}">6. Starostwo</a><br>
+            <a href="{{ url_for('admin_character_page', id='7') }}">7. Rektorat</a><br>
+            <a href="{{ url_for('admin_character_page', id='8') }}">8. Park</a><br>
+        </div>
+    {% endblock %}

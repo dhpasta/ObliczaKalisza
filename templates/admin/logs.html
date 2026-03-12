@@ -1,0 +1,59 @@
+{% extends "layout_admin.html" %}
+
+    {% block content %}
+        <style>
+            table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            }
+            th, td {
+                text-align: center;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        </style>
+        
+        <div class="title">Wyniki rywalizacji</div>
+        <br>
+
+        <table>
+            <tr>
+                <th>patrol_id</th>
+                <th>fraction</th>
+                <th>point_type</th>
+                <th>point_id</th>
+                <th>district</th>
+                <th>points</th>
+                <th>timestamp</th>
+            </tr>
+            {% for data in data %}
+            <tr>
+                {% for d in data %}
+                <td>{{ d }}</td>
+                {% endfor %}
+                <!--
+                <td style="text-align: left;">{{ data.patrol_name }}</td>
+                {% if data.path == 'easy' %}
+                <td>KRW</td>
+                {% endif %}
+                {% if data.path == 'hard' %}
+                <td>ZDL</td>
+                {% endif %}
+                {% if data.fraction == 1 %}
+                <td>R</td>
+                {% endif %}
+                {% if data.fraction == 2 %}
+                <td>W</td>
+                {% endif %}
+                {% if data.fraction == 3 %}
+                <td>H</td>
+                {% endif %}
+                {% if data.fraction == 4 %}
+                <td>D</td>
+                {% endif %}
+                <td>{{ data.points }}</td>
+                <td>{{ data.time }}</td> -->
+            </tr>
+            {% endfor %}
+        </table>
+    {% endblock %}

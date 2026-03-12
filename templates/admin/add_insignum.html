@@ -1,0 +1,27 @@
+{% extends "layout_admin.html" %}
+
+    {% block content %}
+        <form method="POST" action="/admin_insert_insignum">
+            <div class="centered">
+                <b>Przyznawanie insygnium z Karty Umiejętności</b>
+                <hr>
+
+                Id patrolu:<br>
+                <input name="patrol_id" id="patrol_id" type="text" maxlength="2" inputmode="numeric" required>
+                <hr>
+
+                Insygnium:<br>
+                <input type="radio" id="1" name="insignium" value="1" required>
+                <label for="1">1.</label><br>
+                <input type="radio" id="2" name="insignium" value="2">
+                <label for="2">2.</label><br>
+                <input type="radio" id="3" name="insignium" value="3">
+                <label for="3">3.</label><br>
+                <hr>
+            </div>
+            
+            <div class="buttons">
+                <input class="button" type="submit" name="save" value="DODAJ INSYGNIUM">
+            </div>
+        </form>
+    {% endblock %}

@@ -1,0 +1,38 @@
+{% extends "layout_admin.html" %}
+
+    {% block content %}
+        <form method="POST" action="/admin_insert_new_patrol">
+            <div class="centered">
+                <b>Dodawanie niezgłoszonego patrolu</b>
+                <hr>
+
+                Ścieżka:<br>
+                <input type="radio" id="easy" name="path" value="easy" required>
+                <label for="easy">Krzewiciel</label><br>
+                <input type="radio" id="hard" name="path" value="hard">
+                <label for="hard">Zjednoczyciel</label><br>
+                <hr>
+                Ilość osób:<br>
+                <input type="radio" id="1" name="people" value="1" required>
+                <label for="1">1.</label><br>
+                <input type="radio" id="2" name="people" value="2">
+                <label for="2">2.</label><br>
+                <input type="radio" id="3" name="people" value="3">
+                <label for="3">3.</label><br>
+                <input type="radio" id="4" name="people" value="4">
+                <label for="4">4.</label><br>
+                <input type="radio" id="5" name="people" value="5">
+                <label for="5">5.</label><br>
+                <hr>
+                Nazwa patrolu:<br>
+                <input name="patrol_name" id="patrol_name" type="text" maxlength="255" required>
+                <hr>
+                Numer telefonu:<br>
+                <input name="phone" id="phone" type="text" pattern="[0-9]{9}" inputmode="numeric">
+            </div>
+            
+            <div class="buttons">
+                <input class="button" type="submit" name="save" value="DODAJ PATROL">
+            </div>
+        </form>
+    {% endblock %}

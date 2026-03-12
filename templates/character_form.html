@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+    {% block content %}
+        <form method="POST" action="/character_grant_points">
+            <input name ="patrol_id" type="hidden" value="{{ patrol_id }}">
+            <input name ="character_id" type="hidden" value="{{ character_id }}">
+            <input name ="district_owner" type="hidden" value="{{ district_owner }}">
+            <div class="centered">
+                <span style="font-weight: bold;">Przyznajesz punkty patrolowi {{ patrol_data.name }}</span>
+                <br>
+                {% if patrol_data.path == 'easy' %}
+                Ścieżka Krzewiciel
+                {% endif %}
+                {% if patrol_data.path == 'hard' %}
+                Ścieżka Zjednoczyciel
+                {% endif %}
+                
+                <hr>
+
+                Punkty za wykonane zadania:<br>
+                <input type="radio" id="1" name="points" value="1" checked>
+                <label for="1">1</label><br>
+                <input type="radio" id="2" name="points" value="2">
+                <label for="2">2</label><br>
+                <input type="radio" id="3" name="points" value="3">
+                <label for="3">3</label><br>
+                <hr>
+            </div>
+
+            {% if district_owner == 'occupant' %}
+            <div style="font-weight: bold; text-align: center; display: inline-block;
+            padding: .25em 0;
+            background: #f03a3a;
+            color: #ffffff;">
+                Ten patrol znajduje się w kontrolowanej dzielnicy.<br>Daj mu dodatkową pieczątke!</div>
+                <hr>
+            {% endif %}
+            
+            <div class="buttons">
+                <input class="button" type="submit" name="save" value="PRZYZNAJ PUNKTY">
+            </div>
+        </form>
+    {% endblock %}

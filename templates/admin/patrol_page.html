@@ -1,0 +1,160 @@
+{% extends "layout_admin.html" %}
+
+    {% block content %}
+        
+            {% if patrol_data.path == 'hard' %}
+                Umiejętności gildii:<br>
+                <div class="centered">
+
+                    {% if cheat_1 == "available" %}
+                    <a href="{{ url_for('admin_cheat_use', patrol_id=patrol_data.id, cheat_id=1) }}">Umiejętność Rzemieślników <span style="color: green;">DOSTĘPNA</span></a>
+                    <br>
+                    <span style="font-style: italic;">- znajomości - pozwala wykonać od nowa zadanie na dowolnym punkcie</span>
+                    {% endif %}
+                    {% if cheat_1 == "unavailable" %}
+                    Umiejętność Rzemieślników NIEZDOBYTA</a>
+                    {% endif %}
+                    {% if cheat_1 == "used" %}
+                    Umiejętność Rzemieślników <span style="color: red;">WYKORZYSTANA</span>
+                    {% endif %}
+                    <br>
+                    <br>
+                    {% if cheat_2 == "available" %}
+                    <a href="{{ url_for('admin_cheat_use', patrol_id=patrol_data.id, cheat_id=2) }}">Umiejętność Wojów <span style="color: green;">DOSTĘPNA</span></a>
+                    <br>
+                    <span style="font-style: italic;">- podbicie punktu - pozwala na punkcie w dzielnicy której niekontroluje gildia uzyskać dodatkową 4. pieczątkę, ale tylko jeśli uzyska maksymalną liczbę punktów za zadanie</span>
+                    {% endif %}
+                    {% if cheat_2 == "unavailable" %}
+                    Umiejętność Wojów NIEZDOBYTA
+                    {% endif %}
+                    {% if cheat_2 == "used" %}
+                    Umiejętność Wojów <span style="color: red;">WYKORZYSTANA</span>
+                    {% endif %}
+                    <br>
+                    <br>
+                    {% if cheat_3 == "available" %}
+                    <a href="{{ url_for('admin_cheat_use', patrol_id=patrol_data.id, cheat_id=3) }}">Umiejętność Handlarzy <span style="color: green;">DOSTĘPNA</span></a>
+                    <br>
+                    <span style="font-style: italic;">- targowanie sie - ostateczna cena dowolnego przedmiotu jest 50% niższa niż w cenniku</span>
+                    {% endif %}
+                    {% if cheat_3 == "unavailable" %}
+                    Umiejętność Handlarzy NIEZDOBYTA
+                    {% endif %}
+                    {% if cheat_3 == "used" %}
+                    Umiejętność Handlarzy <span style="color: red;">WYKORZYSTANA</span>
+                    {% endif %}
+                    <br>
+                    <br>
+                    {% if cheat_4 == "available" %}
+                    <a href="{{ url_for('admin_cheat_use', patrol_id=patrol_data.id, cheat_id=4) }}">Umiejętność Duchowieństwa <span style="color: green;">DOSTĘPNA</span></a>
+                    <br>
+                    <span style="font-style: italic;">- relikwia - zastępuje jedno dowolne insygnium, ale bez otrzymania punktów, do użycia w biurze</span>
+                    {% endif %}
+                    {% if cheat_4 == "unavailable" %}
+                    Umiejętność Duchowieństwa NIEZDOBYTA
+                    {% endif %}
+                    {% if cheat_4 == "used" %}
+                    Umiejętność Duchowieństwa <span style="color: red;">WYKORZYSTANA</span>
+                    {% endif %}
+
+                    <br>
+                </div>
+            {% endif %}
+            {% if cheat == 'used' %}
+                <div class="centered" style="color: red">
+                    Patrol już wykorzystał swoją umiejętność
+                </div>
+            {% endif %}
+        <hr>
+        <div class="title">
+            Strona patrolu <span style="font-weight: bold">{{ patrol_data.name }}</span>
+        </div>
+        <div class="centered">
+            <hr>
+            {% if patrol_data.path == 'easy' %}
+            <span style="font-style: italic;">Ścieżka Krzewiciel</span>
+            {% endif %}
+            {% if patrol_data.path == 'hard' %}
+            <span style="font-style: italic;">Ścieżka Zjednoczyciel</span>
+            {% endif %}
+            <br>
+
+            {% if patrol_data.fraction == 1 %}
+            <span style="text-decoration: underline; text-decoration-color: #5d7163; text-decoration-thickness: 30%;">Gildia Rzemieślników</span>
+            {% endif %}
+            {% if patrol_data.fraction == 2 %}
+            <span style="text-decoration: underline; text-decoration-color: #884547; text-decoration-thickness: 30%;">Gildia Wojowników</span>
+            {% endif %}
+            {% if patrol_data.fraction == 3 %}
+            <span style="text-decoration: underline; text-decoration-color: #b89042; text-decoration-thickness: 30%;">Gildia Handlarzy</span>
+            {% endif %}
+            {% if patrol_data.fraction == 4 %}
+            <span style="text-decoration: underline; text-decoration-color: #8ca6b1; text-decoration-thickness: 30%;">Gildia Duchowieństwa</span>
+            {% endif %}
+
+            <hr>
+            Ilość zgromadzonych punktów:
+            <br>
+            <span style="font-weight: bold">{{ patrol_data.points }}</span>
+
+            <hr>
+            Zdobyte pieczątki:
+            <br>
+            <table style="border: none;">
+                <tr>
+                    <td style="border: none; "><img src="{{ url_for('static', filename='stamp.png')}}"></td>
+                    <td style="vertical-align: middle; text-align: center; border: none; padding-left: 10px; padding-right: 15px;">x {{ patrol_data.stamps }}</td>
+                    <td style="border: none;"><img src="{{ url_for('static', filename='bonus.png')}}"></td>
+                    <td style="vertical-align: middle; text-align: center; border: none; padding-left: 10px; padding-right: 15px;">x {{ patrol_data.bonus }}</td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+        Zdobyte wskazówki: 
+        {% if patrol_data.hints != 0 %}
+        {{ patrol_data.hints }}<br><br>
+        <div class="centered">
+        <b>Zapamiętaj wskazówkę! Na stronie wyświetla się tylko ostatnia!</b>
+            <img src="{{ url_for('static', filename=patrol_data.hint_img[0])}}" width="100%">
+            {% if patrol_data.hint_img[1] == 1 %}
+            <span style="font-style: italic;">powyższa wskazówka dotyczy berła</span>
+            {% endif %}
+            {% if patrol_data.hint_img[1] == 2 %}
+            <span style="font-style: italic;">powyższa wskazówka dotyczy jabłka</span>
+            {% endif %}
+            {% if patrol_data.hint_img[1] == 3 %}
+            <span style="font-style: italic;">powyższa wskazówka dotyczy szczerbca</span>
+            {% endif %}
+        </div>
+        {% else %}
+            0<br>
+        {% endif %}
+        <hr>
+        Zdobyte Insygnia:<br>
+        <div class="centered">
+            {% if patrol_data.scepter %}
+                <img src="{{ url_for('static', filename='scepter.png')}}">
+            {% else %}
+                <img src="{{ url_for('static', filename='scepter_empty.png')}}">
+            {% endif %}
+            {% if patrol_data.apple %}
+                <img src="{{ url_for('static', filename='apple.png')}}">
+            {% else %}
+                <img src="{{ url_for('static', filename='apple_empty.png')}}">
+            {% endif %}
+            {% if patrol_data.sword %}
+                <img src="{{ url_for('static', filename='sword.png')}}">
+            {% else %}
+                <img src="{{ url_for('static', filename='sword_empty.png')}}">
+            {% endif %}
+        </div>
+        <hr>
+        Koronacja Króla:<br>
+        <div class="centered">
+            {% if patrol_data.coronation %}
+                <img src="{{ url_for('static', filename='crown.png')}}">
+            {% else %}
+                <img src="{{ url_for('static', filename='crown_empty.png')}}">
+            {% endif %}
+        </div>
+    {% endblock %}

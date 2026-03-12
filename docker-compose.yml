@@ -1,0 +1,38 @@
+services:
+
+  app:
+    image: app-app:latest
+    container_name: oblicza_app
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      TZ: Europe/Warsaw
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - db_network
+
+  db:
+    image: mysql:8.0.39
+    container_name: oblicza_db
+    volumes:
+      - ./mysql-dump:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - 3306:3306
+    networks:
+      - db_network
+    healthcheck:
+        test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "--silent"]
+        interval: 2s
+        timeout: 20s
+        retries: 10
+
+networks:
+  db_network:
+    driver: bridge
