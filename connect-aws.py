@@ -28,11 +28,11 @@ def connect_params(self):
     rds_credentials = json.loads(secret)
 
     return pymysql.connect(
-        host = rds_credentials["db_hostname"]
+        host = rds_credentials["db_hostname"],
         user = rds_credentials["db_username"],
         password = rds_credentials["db_password"],
         port = rds_credentials["db_port"],
-        db = rds_credentials["db_name"],
+        db = rds_credentials["db_name"]
     )
 
 
