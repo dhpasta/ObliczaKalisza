@@ -106,12 +106,16 @@ Image shows patrol home page (edition 2025).
 - patrols end game by scanning QR code in event office.
 </details>
 
-## 📡 Project deploy
-Project ready for local testing in docker containers.
-
+## 📡 Project deployment
+Project in repository is ready for local testing in docker containers.
 Database has to be filled with patrols and tasks data.
 
-For event project has been deployed on AWS virtual machine with configured NGINX server, TLS certification and suitable database.
+For an event, project had been deployed to AWS services.
+
+Plug & play AWS infrastructure designed in Terraform can be found here:
+[ObliczaKalisza_AWS_IaC](https://github.com/dhpasta/ObliczaKalisza_AWS_IaC).
+
+Simple script provided during instance launch (*init.sh*) acts as application deployment. It switches files prepared for connection with AWS RDS database (suffix *-aws*), loads initial data, install required software, then clone git repository and build up containers.
 
 
 ## 🔔 Planned features
