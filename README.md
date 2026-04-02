@@ -10,7 +10,7 @@ Application has been used to support 5 editions of event "Oblicza Kalisza". Arou
 
 ## ❓ What is a "city quest"?
 According to our idea, city quest is a form of game in which participants compete with each other by seeking and solving tasks hidden in some area of a city.
-People of all age, gathered in patrols are pursuing main goal of the quest collecting points and items. There are prices for the most involved!
+People of all ages, gathered in patrols are pursuing main goal of the quest collecting points and items. There are prizes for the most involved!
 
 This is our alternative for celebrating Independence Day, teaching about history of our city and integrating residents.
 
@@ -91,31 +91,41 @@ Image shows **Patrol home page** (edition 2025).
 
 <details>
 
-<summary>Details:</summary>
+<summary>See how users can operate the app</summary>
 
-- to **obtain access to administration panel** you have to visit address *host/admin_permit*,
-- then you can access panel via *host/admin*,
-- to **obtain organizer privileges** to manage checkpoints people can scan QR code available in administration panel or visit *host/register_organizer* - theirs name will be assigned to their phone,
+- to **obtain access to administration panel** you have to visit address: *your_host/admin_permit*,
+- then you can access the administration panel via *your_host/admin*,
+- to **obtain organizer privileges** user can scan QR code available in administration panel or visit address *your_host/register_organizer* - user will asked for name,
 - organizers by scanning QR codes on checkpoints will assign them to districts in database,
-- **character privileges** can be obtained in panel or via *host/register_character*,
+- all the checkpoints set by this user will be label with their name in database,
+- **character privileges** can be obtained analogously via QR code or: *your_host/register_character*,
 - characters grant points to patrols by scanning patrols QR code available in patrol app,
-- organizers and characters can visit *host* for their home pages with summary,
-- staff privileges can be removed by scanning proper QR code in panel,
-- **patrols assign one phone to team** by scanning QR code in patrol booklet and confirming their identity,
-- in game patrols can scan codes on checkpoints and bonuses or visit *host* address for their home page,
-- patrols end game by scanning QR code in event office.
+- organizers and characters can visit host address for their home page with summary,
+- staff privileges can be removed by scanning proper QR code avalible in the administration panel,
+- **patrols assign one phone to the team** by scanning QR code in patrol booklet,
+- patrol must confirm its identity by providing last three digits of its phone number given during registration,
+- in game, patrols can scan codes on checkpoints and bonuses or visit host address for their home page,
+- patrols end game by scanning QR code in event office which stops their game time.
 </details>
 
 ## 📡 Project deployment
-Project in repository is ready for local testing in docker containers.
-Database has to be filled with patrols and tasks data.
+Project in this repository is ready for local testing in docker containers.
+Database has to be filled with patrols and tasks data. You can use the administration panel do add patrols and organizer privileges to assign codes to checkpoints.
 
-For an event, project had been deployed to AWS services.
+To run application in Docker containers:
+```
+git clone https://github.com/dhpasta/ObliczaKalisza.git
+cd ObliczaKalisza
+docker compose up
+```
 
-Plug & play AWS infrastructure designed in Terraform can be found here:
-[ObliczaKalisza_AWS_IaC](https://github.com/dhpasta/ObliczaKalisza_AWS_IaC).
+For the event, project had been deployed to AWS services.
 
-Simple script provided during instance launch (*init.sh*) acts as application deployment. It switches files prepared for connection with AWS RDS database (suffix *-aws*), loads initial data, install required software, then clone git repository and build up containers.
+AWS infrastructure designed in Terraform can be found here:
+[ObliczaKalisza_AWS_IaC repository](https://github.com/dhpasta/ObliczaKalisza_AWS_IaC).
+
+Simple script provided during instance launch (*init.sh*) acts as application deployment.
+It installs required software, clones this repository, switches files prepared for connection with RDS database (suffix *-aws*), loads schema to database and builds up containers.
 
 
 ## 🔔 Planned features
@@ -127,4 +137,4 @@ Simple script provided during instance launch (*init.sh*) acts as application de
 - create a test platform for new types of tasks,
 - add statistics preview to admin panel e.g., the most and least visited checkpoint.
 
-Mine main goal is to create universal engine for carrying out such a events just by uploading into it configuration files and data.
+My main goal is to create universal engine for carrying out such a events just by uploading configuration files and necessary data.
