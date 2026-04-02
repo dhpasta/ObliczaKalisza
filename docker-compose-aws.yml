@@ -3,6 +3,7 @@ services:
   db_init:
     container_name: db_init
     build: db_init
+    restart: on-failure:3
 
   app:
     image: app-app:latest
