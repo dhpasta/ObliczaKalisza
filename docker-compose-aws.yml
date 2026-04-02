@@ -1,9 +1,15 @@
 services:
 
+  db_init:
+    container_name: db_init
+    build: db_init
+
   app:
     image: app-app:latest
     container_name: oblicza_app
     build: .
+    depends_on:
+    - db_init
     ports:
       - "5000:5000"
     environment:
