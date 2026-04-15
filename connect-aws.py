@@ -5,7 +5,7 @@ import json
 from botocore.exceptions import ClientError
 
 def connect_params(self):
-    secret_name = "rds-pwd"
+    secret_name = "rds_pwd"
     region_name = "eu-west-1"
 
     # Create a Secrets Manager client
