@@ -2,7 +2,7 @@ from flask import Flask, flash, make_response, redirect, render_template, reques
 from database import Database
 import variables as var
 from cookies import *
-from aws_sdk import EC2InstanceWrapper
+from aws_sdk import *
 
 import sys
 import os
@@ -468,34 +468,46 @@ def admin_functional_codes_testing():
     if not request.cookies.get('admin'):
         return redirect(url_for('message', text="BRAK DOSTĘPU"))
     else:
-        domain=EC2InstanceWrapper.display()
-        print(domain)
-        data="http://www.oblicza-kalisza.pl/remove_cookie"
-        qr = qrcode.make(data)
-        buffered = BytesIO()
-        qr.save(buffered, format="PNG")
-        img_remove_cookie = base64.b64encode(buffered.getvalue()).decode()
+        domain=get_ec2_instances()
 
-        data="http://www.oblicza-kalisza.pl/organizer"
-        qr = qrcode.make(data)
-        buffered = BytesIO()
-        qr.save(buffered, format="PNG")
-        img_organizer = base64.b64encode(buffered.getvalue()).decode()
+        qr_codes = []
+        
+        qr_values = [
+            "remove_cookie",
+            "organizer",
+            "character",
+            "?type=time_stop",
+            "?type=qr&id=seff5d8e6d4f",
+            "?type=qr&id=df5ev4rr6sdf",
+            "?type=qr&id=saef4f5def4r",
+            "?type=qr&id=sad45a74f7r5",
+            "?type=qr&id=fs65f7ed4fd5",
+            "?type=fraction&id=1",
+            "?type=fraction&id=2",
+            "?type=fraction&id=3",
+            "?type=fraction&id=4",
+            "?type=patrol&id=1",
+            "?type=patrol&id=2",
+            "?type=patrol&id=3",
+            "?type=patrol&id=4",
+            "?type=patrol&id=5",
+            "?type=insignia&id=1",
+            "?type=insignia&id=2",
+            "?type=insignia&id=3",
+            "?type=coronation"
+        ]
 
-        data="http://www.oblicza-kalisza.pl/character"
-        qr = qrcode.make(data)
-        buffered = BytesIO()
-        qr.save(buffered, format="PNG")
-        img_character = base64.b64encode(buffered.getvalue()).decode()
+        for value in qr_values:
+            data="http://" + domain + "/" + value
+            qr = qrcode.make(data)
+            buffered = BytesIO()
+            qr.save(buffered, format="PNG")
+            encoded = base64.b64encode(buffered.getvalue()).decode()
 
-        data="http://www.oblicza-kalisza.pl/?type=time_stop"
-        qr = qrcode.make(data)
-        buffered = BytesIO()
-        qr.save(buffered, format="PNG")
-        img_time_stop = base64.b64encode(buffered.getvalue()).decode()
+            qr_codes.append({"value": value, "encoded": encoded})
 
+        return render_template('admin/functional_codes_testing.html', qr_codes=qr_codes)
 
-        return render_template('admin/functional_codes_testing.html', img_remove_cookie=img_remove_cookie, img_organizer=img_organizer, img_character=img_character, img_time_stop=img_time_stop)
 
 @app.route('/admin_map') 
 def admin_map():
