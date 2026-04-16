@@ -5,5 +5,6 @@ instances = EC2_RESOURCE.instances.all()
 
 def get_ec2_instances():
     for instance in instances:
-        return instance.public_ip_address
+        if instance.state['Code'] == 16:
+            return instance.public_ip_address
 
