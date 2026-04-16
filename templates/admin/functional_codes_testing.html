@@ -1,0 +1,45 @@
+{% extends "layout_admin.html" %}
+
+    {% block content %}
+        <b>Test page with added domain address to the codes</b>
+        <div class="centered">
+            <img src="data:image/png;base64,{{ img_organizer }}" width="80%" alt="QR Code">
+            <br>
+            <b>Uprawnienia organizatora</b>
+        </div>
+        <br>
+        <br>
+        <hr>
+        <br>
+        <br>
+        <div class="centered">
+            <img src="data:image/png;base64,{{ img_character }}" width="80%" alt="QR Code">
+            <br>
+            <b>Uprawnienia punktowego</b>
+        </div>
+        <br>
+        <br>
+        <hr>
+        <br>
+        <br>
+        <div class="centered">
+            <img src="data:image/png;base64,{{ img_remove_cookie }}" width="80%" alt="QR Code">
+            <br>
+            <b>Usuń ciasteczko</b>
+        </div>
+        <br>
+        <br>
+        <hr>
+        <br>
+        <br>
+        <div class="centered">
+            <img src="data:image/png;base64,{{ img_time_stop }}" width="80%" alt="QR Code">
+            <br>
+            <b>Zatrzymanie czasu gry dla patrolu</b>
+        </div>
+        <br>
+        <br>
+        <hr>
+        <br>
+        <br>
+    {% endblock %}

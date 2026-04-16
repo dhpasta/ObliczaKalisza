@@ -2,6 +2,7 @@ from flask import Flask, flash, make_response, redirect, render_template, reques
 from database import Database
 import variables as var
 from cookies import *
+from aws_sdk import EC2InstanceWrapper
 
 import sys
 import os
@@ -460,6 +461,41 @@ def admin_functional_codes():
 
 
         return render_template('admin/functional_codes.html', img_remove_cookie=img_remove_cookie, img_organizer=img_organizer, img_character=img_character, img_time_stop=img_time_stop)
+
+
+@app.route('/admin_functional_codes_testing') 
+def admin_functional_codes_testing():
+    if not request.cookies.get('admin'):
+        return redirect(url_for('message', text="BRAK DOSTĘPU"))
+    else:
+        domain=EC2InstanceWrapper.display()
+        print(domain)
+        data="http://www.oblicza-kalisza.pl/remove_cookie"
+        qr = qrcode.make(data)
+        buffered = BytesIO()
+        qr.save(buffered, format="PNG")
+        img_remove_cookie = base64.b64encode(buffered.getvalue()).decode()
+
+        data="http://www.oblicza-kalisza.pl/organizer"
+        qr = qrcode.make(data)
+        buffered = BytesIO()
+        qr.save(buffered, format="PNG")
+        img_organizer = base64.b64encode(buffered.getvalue()).decode()
+
+        data="http://www.oblicza-kalisza.pl/character"
+        qr = qrcode.make(data)
+        buffered = BytesIO()
+        qr.save(buffered, format="PNG")
+        img_character = base64.b64encode(buffered.getvalue()).decode()
+
+        data="http://www.oblicza-kalisza.pl/?type=time_stop"
+        qr = qrcode.make(data)
+        buffered = BytesIO()
+        qr.save(buffered, format="PNG")
+        img_time_stop = base64.b64encode(buffered.getvalue()).decode()
+
+
+        return render_template('admin/functional_codes_testing.html', img_remove_cookie=img_remove_cookie, img_organizer=img_organizer, img_character=img_character, img_time_stop=img_time_stop)
 
 @app.route('/admin_map') 
 def admin_map():
